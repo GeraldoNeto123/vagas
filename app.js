@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+var middlewareIsAdmin = require("./middlewares/isAdmin");
+
 var teste1 = require("./teste1");
 var teste2 = require("./teste2");
 var teste3 = require("./teste3");
@@ -31,8 +33,8 @@ app.get('/', function(req, res){
 app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
 app.post("/users", teste2)
-app.delete("/users", teste3)
-app.put("/users", teste4)
+app.delete("/users", middlewareIsAdmin, teste3)
+app.put("/users", middlewareIsAdmin, teste4)
 app.get("/users/access", teste5);
 
 
